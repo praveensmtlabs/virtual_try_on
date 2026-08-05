@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+:root {
+  --studio-ink: #1a1410;
+  --studio-sand: #f5f0eb;
+  --studio-brass: #c9a66b;
+  --studio-mist: #f5f0eb;
+  --font-display: "Cormorant Garamond", "Times New Roman", serif;
+  --font-body: "DM Sans", "Segoe UI", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: var(--studio-mist);
+  color: var(--studio-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--studio-brass) 45%, transparent);
+}
+

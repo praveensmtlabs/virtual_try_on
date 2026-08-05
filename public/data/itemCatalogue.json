@@ -1,0 +1,297 @@
+{
+  "items": {
+    "male": {
+      "basicTee": {
+        "name": "NK Sport Raglan Basic",
+        "price": "£27.99",
+        "color": "Light Blue / White",
+        "material": "75% Polyester / 25% Cotton",
+        "sku": "NS-38104",
+        "description": "A sporty essential for any wardrobe. This raglan sleeve t-shirt combines a classic athletic look with a soft polyester-cotton blend for ultimate comfort during any activity. Perfect for the gym or casual wear.",
+        "modelPath": "./3dmodels/men/tshirts/basictee/basictee.glb",
+        "modelPathMobile": "./3dmodels/men/tshirts/basictee/basictee_mob.glb"
+      },
+      "soccerTee": {
+        "name": "Arsenal 2025/26 Home t-Shirt",
+        "price": "£49.99",
+        "color": "Red / White",
+        "material": "Polyester",
+        "sku": "AH-58219",
+        "description": "Support the Gunners in style with the official Arsenal 2025/26 home shirt. Engineered from lightweight performance polyester, it features the iconic red and white colours, ensuring you stay cool and comfortable on or off the pitch.",
+        "modelPath": "./3dmodels/men/tshirts/soccertee/soccertee.glb",
+        "modelPathMobile": "./3dmodels/men/tshirts/soccertee/soccertee_mob.glb"
+      },
+      "poloTee": {
+        "name": "Ralph Lauren Tri-Colour Polo",
+        "price": "£139.99",
+        "color": "Multi (White / Red / Blue / Navy)",
+        "material": "Piqué Cotton",
+        "sku": "RL-83015",
+        "description": "A timeless classic from Ralph Lauren. This polo is crafted from premium piqué cotton and features a bold tri-colour design. A sophisticated choice for smart-casual occasions, offering both iconic style and exceptional comfort.",
+        "modelPath": "./3dmodels/men/tshirts/polotee/polotee.glb",
+        "modelPathMobile": "./3dmodels/men/tshirts/polotee/polotee_mob.glb"
+      },
+      "wayfarerSunglasses": {
+        "name": "Ray-Ban Wayfarers",
+        "price": "£149.99",
+        "color": "Black/Blue Mirror",
+        "material": "Acetate Frame",
+        "sku": "RW-28401",
+        "headType": "glasses",
+        "description": "The definitive style icon. These genuine Ray-Ban Wayfarers feature a classic black acetate frame paired with modern blue mirror lenses, offering timeless style and complete UV protection for any occasion.",
+        "modelPath": "./3dmodels/men/accs/wayfarersunglasses/wayfarersunglasses.glb",
+        "modelPathMobile": "./3dmodels/men/accs/wayfarersunglasses/wayfarersunglasses_mob.glb"
+      },
+      "baseballCap": {
+        "name": "Avirex Baseball Cap",
+        "price": "£19.99",
+        "color": "Green",
+        "material": "Acrylic",
+        "sku": "BC-10754",
+        "headType": "hat",
+        "description": "Top off your casual look with this Avirex baseball cap. Made from durable acrylic in a versatile green, it's the perfect accessory for a relaxed, streetwear-inspired style.",
+        "modelPath": "./3dmodels/men/accs/baseballcap/baseballcap.glb",
+        "modelPathMobile": "./3dmodels/men/accs/baseballcap/baseballcap_mob.glb"
+      },
+      "aviatorSunglasses": {
+        "name": "Rayban Aviators",
+        "price": "£89.99",
+        "color": "Black/Silver",
+        "material": "Metal Frame",
+        "sku": "RA-84620",
+        "headType": "glasses",
+        "description": "Originally designed for pilots, these classic Ray-Ban Aviators offer an iconic look with a lightweight black and silver metal frame. A perfect blend of function and style for a sharp, sophisticated edge.",
+        "modelPath": "./3dmodels/men/accs/aviatorsunglasses/aviatorsunglasses.glb",
+        "modelPathMobile": "./3dmodels/men/accs/aviatorsunglasses/aviatorsunglasses_mob.glb"
+      },
+      "bucketHat": {
+        "name": "Carhartt 'Go Fishing!' Bucket Hat",
+        "price": "£24.99",
+        "color": "Light Blue / Navy / White",
+        "material": "Cotton Canvas",
+        "sku": "CH-92847",
+        "headType": "hat",
+        "description": "A classic fishing bucket hat from Carhartt featuring a light blue crown with navy and white accent stripes. The wide brim provides excellent sun protection, while the durable cotton canvas construction ensures long-lasting wear for outdoor adventures.",
+        "modelPath": "./3dmodels/men/accs/buckethat/buckethat.glb",
+        "modelPathMobile": "./3dmodels/men/accs/buckethat/buckethat_mob.glb"
+      },
+      "beanieHat": {
+        "name": "Winter Striped Beanie",
+        "price": "£12.99",
+        "color": "Red / Grey / Charcoal",
+        "material": "100% Acrylic Knit",
+        "sku": "WB-42183",
+        "headType": "hat",
+        "description": "A classic ribbed knit beanie featuring bold horizontal stripes in red, grey, and charcoal with a distinctive pom-pom detail. The traditional fold-over cuff design provides extra warmth and a timeless casual style perfect for cold weather.",
+        "modelPath": "./3dmodels/men/accs/beaniehat/beaniehat.glb",
+        "modelPathMobile": "./3dmodels/men/accs/beaniehat/beaniehat_mob.glb"
+      },
+      "fedoraHat": {
+        "name": "Classic 'IndieJones' Fedora",
+        "price": "£45.99",
+        "color": "Tan / Brown",
+        "material": "100% Wool Felt",
+        "sku": "CF-73291",
+        "headType": "hat",
+        "description": "A timeless wool felt fedora that brings out the archeologist in you. Featuring a classic teardrop crown with center crease and traditional brown leather hatband.",
+        "modelPath": "./3dmodels/men/accs/fedorahat/fedorahat.glb",
+        "modelPathMobile": "./3dmodels/men/accs/fedorahat/fedorahat_mob.glb"
+      },
+      "nycardiganTop": {
+        "name": "NY Winter Cardigan",
+        "price": "£59.99",
+        "color": "Burgundy / Light Grey",
+        "material": "100% Cashmere Wool",
+        "sku": "NW-75928",
+        "description": "Experience luxurious warmth with this New York-inspired winter cardigan. Made from 100% pure cashmere wool, its rich burgundy and grey tones create a sophisticated layering piece for the colder months.",
+        "modelPath": "./3dmodels/men/upper/nycardigantop/nycardigantop.glb",
+        "modelPathMobile": "./3dmodels/men/upper/nycardigantop/nycardigantop_mob.glb"
+      },
+      "smartShirtTop": {
+        "name": "Smart Shirt",
+        "price": "£45.00",
+        "color": "White",
+        "material": "Cotton",
+        "sku": "SS-48261",
+        "description": "A cornerstone of any smart wardrobe. This crisp white shirt is tailored from breathable cotton for a sharp, comfortable fit. An essential piece for professional settings or formal events.",
+        "modelPath": "./3dmodels/men/upper/smartshirttop/smartshirttop.glb",
+        "modelPathMobile": "./3dmodels/men/upper/smartshirttop/smartshirttop_mob.glb"
+      },
+      "blackpant": {
+        "name": "Black Cargo Pants",
+        "price": "£55.00",
+        "color": "Matte Black",
+        "material": "100% Cotton Canvas",
+        "sku": "CP-93021",
+        "description": "Durable and stylish black cargo trousers designed for everyday utility and comfort.",
+        "modelPath": "./3dmodels/men/pants/pants_black/tight_pant.glb",
+        "modelPathMobile": "./3dmodels/men/pants/pants_black/tight_pant.glb",
+        "isStatic": true
+      }
+    },
+    "female": {
+      "skylineCropTee": {
+        "name": "Skyline Crop Tee",
+        "price": "£27.99",
+        "color": "Light Blue / White",
+        "material": "75% Polyester / 25% Cotton",
+        "sku": "SCT-98765",
+        "description": "A fresh and modern V-neck t-shirt with contrasting white sleeves and a comfortable, cropped fit. Perfect for a relaxed, sporty look.",
+        "modelPath": "./3dmodels/women/tops/skylinecroptee/skylinecroptee.glb",
+        "modelPathMobile": "./3dmodels/women/tops/skylinecroptee/skylinecroptee_mob.glb"
+      },
+      "azureDaydreamSet": {
+        "name": "Azure Daydream Set",
+        "price": "£89.99",
+        "color": "Light Blue / White",
+        "material": "Cotton/Polyester Blend",
+        "sku": "ST-38165",
+        "description": "A fresh and coordinated two-piece set featuring a light blue, adjustable tank top layered over a soft white t-shirt. The outfit is completed by a matching blue A-line skirt with a stylish black belt, creating a versatile and comfortable look.",
+        "modelPath": "./3dmodels/women/outfits/azure/azure.glb",
+        "modelPathMobile": "./3dmodels/women/outfits/azure/azure_mob.glb"
+      },
+      "mondrianDress": {
+        "name": "YSL Mondrian Dress",
+        "price": "£1,250.00",
+        "color": "Colour-Block",
+        "material": "Premium Cotton",
+        "sku": "YSL-1965-MD",
+        "description": "A timeless YSL design inspired by Piet Mondrian's iconic geometric patterns. This sleeveless A-line dress features bold color-block panels in primary hues, crafted from premium cotton for elegance and comfort.",
+        "modelPath": "./3dmodels/women/outfits/mondriandress/mondriandress.glb",
+        "modelPathMobile": "./3dmodels/women/outfits/mondriandress/mondriandress_mob.glb"
+      },
+      "womenFashionableWovenPant": {
+        "name": "Women Fashionable Woven Pant",
+        "price": "£59.99",
+        "color": "Grey / Black",
+        "material": "100% Woven Cotton",
+        "sku": "WF-39201",
+        "description": "A stylish, comfortable woven pant designed for a modern feminine look.",
+        "modelPath": "./3dmodels/women/pants/women_fashionable_woven_pant.glb",
+        "modelPathMobile": "./3dmodels/women/pants/women_fashionable_woven_pant.glb",
+        "isStatic": true
+      }
+    }
+  },
+  "categories": {
+    "male": [
+      {
+        "category": "T-Shirts",
+        "items": [
+          {
+            "id": "basicTee",
+            "name": "Basic T-Shirt",
+            "thumbnail": "3dmodels/men/tshirts/basictee/basictee.png"
+          },
+          {
+            "id": "soccerTee",
+            "name": "Soccer T-Shirt",
+            "thumbnail": "3dmodels/men/tshirts/soccertee/soccertee.png"
+          },
+          {
+            "id": "poloTee",
+            "name": "Polo T-Shirt",
+            "thumbnail": "3dmodels/men/tshirts/polotee/polotee.png"
+          }
+        ]
+      },
+      {
+        "category": "Accessories",
+        "items": [
+          {
+            "id": "wayfarerSunglasses",
+            "name": "Wayfarer Sunglasses",
+            "thumbnail": "3dmodels/men/accs/wayfarersunglasses/wayfarersunglasses.png"
+          },
+          {
+            "id": "baseballCap",
+            "name": "Avirex Baseball Cap",
+            "thumbnail": "3dmodels/men/accs/baseballcap/baseballcap.png"
+          },
+          {
+            "id": "aviatorSunglasses",
+            "name": "Aviator Sunglasses",
+            "thumbnail": "3dmodels/men/accs/aviatorsunglasses/aviatorsunglasses.png"
+          },
+          {
+            "id": "bucketHat",
+            "name": "Carhartt Bucket Hat",
+            "thumbnail": "3dmodels/men/accs/buckethat/buckethat.png"
+          },
+          {
+            "id": "beanieHat",
+            "name": "Winter Striped Beanie",
+            "thumbnail": "3dmodels/men/accs/beaniehat/beaniehat.png"
+          },
+          {
+            "id": "fedoraHat",
+            "name": "Classic Fedora",
+            "thumbnail": "3dmodels/men/accs/fedorahat/fedorahat.png"
+          }
+        ]
+      },
+      {
+        "category": "Upper",
+        "items": [
+          {
+            "id": "nycardiganTop",
+            "name": "NY Cardigan",
+            "thumbnail": "3dmodels/men/upper/nycardigantop/nycardigantop.png"
+          },
+          {
+            "id": "smartShirtTop",
+            "name": "Smart Shirt",
+            "thumbnail": "3dmodels/men/upper/smartshirttop/smartshirttop.png"
+          }
+        ]
+      },
+      {
+        "category": "Pants",
+        "items": [
+          {
+            "id": "blackpant",
+            "name": "Black Cargo Pants",
+            "thumbnail": "3dmodels/men/pants/pants_black/pants_black.png"
+          }
+        ]
+      }
+    ],
+    "female": [
+      {
+        "category": "Tops",
+        "items": [
+          {
+            "id": "skylineCropTee",
+            "name": "Skyline Crop Tee",
+            "thumbnail": "3dmodels/women/tops/skylinecroptee/skylinecroptee.png"
+          }
+        ]
+      },
+      {
+        "category": "Outfits",
+        "items": [
+          {
+            "id": "azureDaydreamSet",
+            "name": "Azure Daydream Set",
+            "thumbnail": "3dmodels/women/outfits/azure/azure.png"
+          },
+          {
+            "id": "mondrianDress",
+            "name": "Mondrian Dress",
+            "thumbnail": "3dmodels/women/outfits/mondriandress/mondriandress.png"
+          }
+        ]
+      },
+      {
+        "category": "Pants",
+        "items": [
+          {
+            "id": "womenFashionableWovenPant",
+            "name": "Woven Pant",
+            "thumbnail": "3dmodels/women/pants/women_fashionable_woven_pant.png"
+          }
+        ]
+      }
+    ]
+  }
+}

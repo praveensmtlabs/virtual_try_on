@@ -1,0 +1,171 @@
+{
+  "units": "meters",
+  "up": "Y",
+  "pose": "T-pose (arms outstretched)",
+  "bbox_m": {
+    "min": [
+      -0.89,
+      0.004,
+      -0.114
+    ],
+    "max": [
+      0.89,
+      1.769,
+      0.168
+    ]
+  },
+  "height_m": 1.765,
+  "height_cm": 176.5,
+  "arm_span_m": 1.78,
+  "torso_depth_m": 0.282,
+  "verts": 15882,
+  "triangles": 28880,
+  "skeleton": "mixamorig1:* (65 bones)",
+  "sections_cm": {
+    "ankle": {
+      "y_m": 0.11,
+      "samples": 298,
+      "radius_m": 0.182,
+      "circ_cm": 114.4,
+      "width_cm": 37.5,
+      "depth_cm": 9.9
+    },
+    "calf": {
+      "y_m": 0.322,
+      "samples": 244,
+      "radius_m": 0.189,
+      "circ_cm": 118.8,
+      "width_cm": 38.2,
+      "depth_cm": 10.9
+    },
+    "knee": {
+      "y_m": 0.498,
+      "samples": 258,
+      "radius_m": 0.166,
+      "circ_cm": 104.5,
+      "width_cm": 34.1,
+      "depth_cm": 13.1
+    },
+    "thigh": {
+      "y_m": 0.745,
+      "samples": 240,
+      "radius_m": 0.168,
+      "circ_cm": 105.6,
+      "width_cm": 34,
+      "depth_cm": 16.6
+    },
+    "hips": {
+      "y_m": 0.922,
+      "samples": 254,
+      "radius_m": 0.145,
+      "circ_cm": 91,
+      "width_cm": 30,
+      "depth_cm": 22.3
+    },
+    "waist": {
+      "y_m": 1.028,
+      "samples": 262,
+      "radius_m": 0.129,
+      "circ_cm": 81.3,
+      "width_cm": 26.8,
+      "depth_cm": 20.4
+    },
+    "underbust": {
+      "y_m": 1.169,
+      "samples": 260,
+      "radius_m": 0.136,
+      "circ_cm": 85.4,
+      "width_cm": 27.8,
+      "depth_cm": 20.4
+    },
+    "chest": {
+      "y_m": 1.275,
+      "samples": 253,
+      "radius_m": 0.163,
+      "circ_cm": 102.3,
+      "width_cm": 32.9,
+      "depth_cm": 23.1
+    },
+    "shoulders": {
+      "y_m": 1.381,
+      "samples": 445,
+      "radius_m": 0.257,
+      "circ_cm": 161.8,
+      "width_cm": 54.5,
+      "depth_cm": 23.5
+    },
+    "neck": {
+      "y_m": 1.593,
+      "samples": 200,
+      "radius_m": 0.093,
+      "circ_cm": 58.7,
+      "width_cm": 16,
+      "depth_cm": 19.2
+    }
+  },
+  "recommended_for_clothes": {
+    "height_cm": 176.5,
+    "left_leg": {
+      "ankle": {
+        "y_m": 0.11,
+        "circ_cm": 27.8,
+        "width_cm": 6.5,
+        "depth_cm": 9.7,
+        "n": 110
+      },
+      "calf": {
+        "y_m": 0.322,
+        "circ_cm": 34.2,
+        "width_cm": 10.3,
+        "depth_cm": 10.9,
+        "n": 97
+      },
+      "knee": {
+        "y_m": 0.498,
+        "circ_cm": 37.8,
+        "width_cm": 9.9,
+        "depth_cm": 12.6,
+        "n": 100
+      },
+      "thigh": {
+        "y_m": 0.745,
+        "circ_cm": 58.6,
+        "width_cm": 11.8,
+        "depth_cm": 16.5,
+        "n": 71
+      }
+    },
+    "torso": {
+      "hips": {
+        "y_m": 0.922,
+        "circ_cm": 90.4,
+        "width_cm": 29.6,
+        "depth_cm": 22.2,
+        "n": 186
+      },
+      "waist": {
+        "y_m": 1.028,
+        "circ_cm": 80.5,
+        "width_cm": 26.2,
+        "depth_cm": 20,
+        "n": 195
+      },
+      "chest": {
+        "y_m": 1.275,
+        "circ_cm": 102.2,
+        "width_cm": 32.7,
+        "depth_cm": 23,
+        "n": 203
+      },
+      "neck": {
+        "y_m": 1.593,
+        "circ_cm": 57.6,
+        "width_cm": 14.9,
+        "depth_cm": 19.2,
+        "n": 157
+      }
+    },
+    "shoulder_width_body_cm": 178,
+    "note": "Use ch36-mixamo.min.glb itself as the dress-form. Circumferences are mesh-derived approximates for authoring ease, not tailor tape measures."
+  }
+}
