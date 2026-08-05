@@ -137,7 +137,7 @@ export const alignGarmentToBody = (garmentWrapper: THREE.Group, bodyModel: THREE
 
   const pelvisLocalY = garmentWrapper.userData._pelvisLocalY;
   const isFemale = getBustProjection(bodyModel) !== null;
-  const upperNeckOffsetY = isFemale ? 0.005 : 0.028;
+  const upperNeckOffsetY = isFemale ? 0.005 : 0.01;
 
   if (garmentWrapper.parent) {
     garmentWrapper.parent.updateMatrixWorld(true);
@@ -668,16 +668,6 @@ export function StudioCanvas() {
                 for (let i = 0; i < pos.count; i++) {
                   wv.set(pos.getX(i), pos.getY(i), pos.getZ(i)).applyMatrix4(l2w);
                   const { sx, sz, meshZ, zOffset } = scaleAt(wv.y);
-
-                  if (wv.y >= 18.0 && wv.y <= 24.88) {
-                    const absX = Math.abs(wv.x);
-                    if (absX < 15.5) {
-                      const shift = (15.5 - absX) * 0.96;
-                      if (wv.x < 0) wv.x += shift;
-                      else wv.x -= shift;
-                    }
-                  }
-
                   wv.x *= sx;
                   wv.z = (wv.z - meshZ) * sz + zOffset;
                   wv.applyMatrix4(w2l);
@@ -691,7 +681,7 @@ export function StudioCanvas() {
 
               const fittedBox = getLocalBox(rawModel);
               rawModel.scale.set(1, scaleY, 1);
-              rawModel.position.y = waistY - fittedBox.max.y * scaleY + 0.055;
+              rawModel.position.y = waistY - fittedBox.max.y * scaleY + 0.020;
               rawModel.position.x = -(fittedBox.min.x + fittedBox.max.x) / 2;
               rawModel.position.z = 0;
             }
