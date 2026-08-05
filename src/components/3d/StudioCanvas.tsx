@@ -137,7 +137,7 @@ export const alignGarmentToBody = (garmentWrapper: THREE.Group, bodyModel: THREE
 
   const pelvisLocalY = garmentWrapper.userData._pelvisLocalY;
   const isFemale = getBustProjection(bodyModel) !== null;
-  const upperNeckOffsetY = isFemale ? 0.005 : 0.01;
+  const upperNeckOffsetY = isFemale ? 0.005 : 0.028;
 
   if (garmentWrapper.parent) {
     garmentWrapper.parent.updateMatrixWorld(true);
