@@ -53,14 +53,14 @@ export default function HomePage() {
     <main className="studio-root">
       <StudioCanvas />
       <StudioChrome />
-      <AvatarSelector />
-      <CustomizePanel />
+      {openPanel === "avatar" ? <AvatarSelector /> : null}
+      {openPanel === "customize" ? <CustomizePanel /> : null}
       {openPanel === "generate" ? <GenerateClothingPanel /> : null}
-      <AnimationSelector />
-      <MovementControls />
-      <SavedLooks />
-      <CompareLooks />
-      <Garment360Viewer />
+      {openPanel === "animation" ? <AnimationSelector /> : null}
+      {openPanel === "movement" ? <MovementControls /> : null}
+      {openPanel === "looks" ? <SavedLooks /> : null}
+      {openPanel === "compare" ? <CompareLooks /> : null}
+      {openPanel === "viewer360" ? <Garment360Viewer /> : null}
     </main>
   );
 }

@@ -11,6 +11,8 @@ export function StudioChrome() {
   const togglePanel = useViewerStore((s) => s.togglePanel);
   const resetCamera = useViewerStore((s) => s.resetCamera);
   const rotateBy = useAvatarStore((s) => s.rotateBy);
+  const isAutoRotating = useAvatarStore((s) => s.isAutoRotating);
+  const toggleAutoRotate = useAvatarStore((s) => s.toggleAutoRotate);
   const resetPose = useAvatarStore((s) => s.resetPose);
   const clearClothing = useClothingStore((s) => s.clearClothing);
   const [capturing, setCapturing] = useState(false);
@@ -112,6 +114,12 @@ export function StudioChrome() {
 
           <FloatingButton onClick={handleTakeSelfie}>
             {capturing ? "✓ Saved!" : "Download Look"}
+          </FloatingButton>
+          <FloatingButton
+            active={isAutoRotating}
+            onClick={toggleAutoRotate}
+          >
+            {isAutoRotating ? "Stop Rotate" : "360°"}
           </FloatingButton>
         </div>
       </nav>

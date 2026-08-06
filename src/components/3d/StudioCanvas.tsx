@@ -225,6 +225,7 @@ export function StudioCanvas() {
 
   const selectedAvatarId = useAvatarStore((s) => s.selectedAvatarId);
   const yaw = useAvatarStore((s) => s.yaw);
+  const isAutoRotating = useAvatarStore((s) => s.isAutoRotating);
   const coatId = useClothingStore((s) => s.coatId);
   const shirtId = useClothingStore((s) => s.shirtId);
   const pantsId = useClothingStore((s) => s.pantsId);
@@ -241,18 +242,21 @@ export function StudioCanvas() {
       { id: string; model: THREE.Group; isStatic?: boolean; poseMapper?: SMPLXPoseMapper }
     >;
     manualRotationY: number;
+    isAutoRotating: boolean;
     animFrameId?: number;
   }>({
     manualRotationY: 0,
+    isAutoRotating: false,
     loadedGarments: {},
   });
 
-  // Sync yaw state from store to manual rotation
+  // Sync yaw & autoRotate state from store to canvas ref
   useEffect(() => {
     if (stateRef.current) {
       stateRef.current.manualRotationY = yaw;
+      stateRef.current.isAutoRotating = isAutoRotating;
     }
-  }, [yaw]);
+  }, [yaw, isAutoRotating]);
 
   // Main 3D Canvas initialization
   useEffect(() => {
@@ -327,6 +331,9 @@ export function StudioCanvas() {
       controls.update();
 
       if (stateRef.current.worldGroup) {
+        if (stateRef.current.isAutoRotating) {
+          stateRef.current.manualRotationY += 0.008;
+        }
         stateRef.current.worldGroup.rotation.y = stateRef.current.manualRotationY;
       }
 

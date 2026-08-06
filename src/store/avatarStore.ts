@@ -9,12 +9,14 @@ interface AvatarState {
   measurements: BodyMeasurements;
   position: [number, number, number];
   yaw: number;
+  isAutoRotating: boolean;
   setAvatar: (id: AvatarId) => void;
   setBodyShape: (shape: BodyShapeId) => void;
   setMeasurements: (m: Partial<BodyMeasurements>) => void;
   setPosition: (pos: [number, number, number]) => void;
   setYaw: (yaw: number) => void;
   rotateBy: (delta: number) => void;
+  toggleAutoRotate: () => void;
   resetPose: () => void;
 }
 
@@ -24,7 +26,8 @@ export const useAvatarStore = create<AvatarState>((set, get) => ({
   measurements: DEFAULT_MEASUREMENTS.average,
   position: [0, 0, 0],
   yaw: 0,
-  setAvatar: (id) => set({ selectedAvatarId: id, position: [0, 0, 0], yaw: 0 }),
+  isAutoRotating: false,
+  setAvatar: (id) => set({ selectedAvatarId: id, position: [0, 0, 0], yaw: 0, isAutoRotating: false }),
   setBodyShape: (shape) =>
     set({ bodyShape: shape, measurements: DEFAULT_MEASUREMENTS[shape] }),
   setMeasurements: (m) =>
@@ -32,5 +35,6 @@ export const useAvatarStore = create<AvatarState>((set, get) => ({
   setPosition: (position) => set({ position }),
   setYaw: (yaw) => set({ yaw }),
   rotateBy: (delta) => set({ yaw: get().yaw + delta }),
-  resetPose: () => set({ position: [0, 0, 0], yaw: 0 }),
+  toggleAutoRotate: () => set((state) => ({ isAutoRotating: !state.isAutoRotating })),
+  resetPose: () => set({ position: [0, 0, 0], yaw: 0, isAutoRotating: false }),
 }));
