@@ -332,7 +332,7 @@ export function StudioCanvas() {
 
       if (stateRef.current.worldGroup) {
         if (stateRef.current.isAutoRotating) {
-          stateRef.current.manualRotationY += 0.008;
+          stateRef.current.manualRotationY -= 0.008;
         }
         stateRef.current.worldGroup.rotation.y = stateRef.current.manualRotationY;
       }
@@ -547,6 +547,10 @@ export function StudioCanvas() {
           const modelWrapper = new THREE.Group();
           modelWrapper.name = `GarmentWrapper_${id}`;
           modelWrapper.add(rawModel);
+
+          if (item.fitScale && item.fitScale !== 1) {
+            modelWrapper.scale.setScalar(item.fitScale);
+          }
 
           if (worldGroup) {
             worldGroup.add(modelWrapper);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import type { ClothingCategory, ClothingItem } from "@/types/clothing";
 import { useClothingStore } from "@/store/clothingStore";
 import { useViewerStore } from "@/store/viewerStore";
@@ -38,15 +38,65 @@ export function GenerateClothingPanel() {
   const [style, setStyle] = useState("Formal");
   const [color, setColor] = useState("Black");
   const [prompt, setPrompt] = useState("Formal black slim-fit blazer");
+  const [imageRef, setImageRef] = useState<string | null>(null);
   
   const [isGenerating, setIsGenerating] = useState(false);
   const [statusMsg, setStatusMsg] = useState("");
   const [generatedItem, setGeneratedItem] = useState<ClothingItem | null>(null);
   const [savedSuccess, setSavedSuccess] = useState(false);
 
+  // File Upload Handler
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      if (evt.target?.result) {
+        setImageRef(evt.target.result as string);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // Clipboard Paste Handler (Snipping Tool / Screenshots)
+  const handlePaste = (e: React.ClipboardEvent) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf("image") !== -1) {
+        const file = items[i].getAsFile();
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (evt) => {
+            if (evt.target?.result) {
+              setImageRef(evt.target.result as string);
+            }
+          };
+          reader.readAsDataURL(file);
+          break;
+        }
+      }
+    }
+  };
+
+  // Drag and Drop Handler
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const file = e.dataTransfer?.files?.[0];
+    if (file && file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        if (evt.target?.result) {
+          setImageRef(evt.target.result as string);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleGenerate = async () => {
     setIsGenerating(true);
-    setStatusMsg("Connecting to Gemini AI 3D Synthesizer...");
+    setStatusMsg(imageRef ? "Analyzing reference image with Gemini Vision AI..." : "Connecting to Gemini AI 3D Synthesizer...");
     setGeneratedItem(null);
     setSavedSuccess(false);
 
@@ -57,7 +107,7 @@ export function GenerateClothingPanel() {
       const res = await fetch("/api/generate-clothing", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ category, prompt, style, color, avatarId }),
+        body: JSON.stringify({ category, prompt, style, color, avatarId, image: imageRef }),
       });
 
       const data = await res.json();
@@ -100,14 +150,19 @@ export function GenerateClothingPanel() {
   };
 
   return (
-    <div className="fixed right-6 top-20 z-40 w-96 max-h-[85vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#0b0f15]/85 p-5 shadow-2xl backdrop-blur-xl transition-all duration-300 text-white">
+    <div
+      onPaste={handlePaste}
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={handleDrop}
+      className="fixed right-6 top-20 z-40 w-96 max-h-[85vh] overflow-y-auto rounded-2xl border border-white/15 bg-[#0b0f15]/85 p-5 shadow-2xl backdrop-blur-xl transition-all duration-300 text-white"
+    >
       {/* Header */}
       <div className="flex items-center justify-between border-b border-white/10 pb-3">
         <div>
           <h2 className="text-base font-bold tracking-wide text-white flex items-center gap-2">
             <span className="text-[#c9a66b]">✨</span> Gemini 3D Clothing AI
           </h2>
-          <p className="text-xs text-white/60">Generate & fit 3D garments on Master Avatar</p>
+          <p className="text-xs text-white/60">Generate & fit 3D garments from text or image</p>
         </div>
         <button
           onClick={() => setPanel(null)}
@@ -147,6 +202,48 @@ export function GenerateClothingPanel() {
               );
             })}
           </div>
+        </div>
+
+        {/* Reference Image Upload / Snipping Tool Paste */}
+        <div>
+          <label className="block text-xs font-semibold uppercase tracking-wider text-white/70 mb-1.5">
+            📷 Reference Image (Upload / Paste Snipping Tool)
+          </label>
+          
+          {!imageRef ? (
+            <label className="flex flex-col items-center justify-center gap-1.5 rounded-xl border border-dashed border-white/25 bg-white/5 p-3.5 text-center cursor-pointer hover:border-[#c9a66b] hover:bg-white/10 transition">
+              <span className="text-xs font-semibold text-[#c9a66b]">📷 Upload Image or Ctrl+V (Paste Screenshot)</span>
+              <span className="text-[11px] text-white/50">Upload reference garment image or paste Snipping Tool screenshot</span>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+            </label>
+          ) : (
+            <div className="relative flex items-center gap-3 rounded-xl border border-[#c9a66b] bg-black/40 p-2.5">
+              <img
+                src={imageRef}
+                alt="Garment Reference"
+                className="h-16 w-16 rounded-lg object-cover border border-white/20"
+              />
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-semibold text-[#c9a66b] flex items-center gap-1">
+                  ✨ Image Reference Attached
+                </p>
+                <p className="text-[11px] text-white/60 truncate">Gemini Vision AI active for texture & cut matching</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setImageRef(null)}
+                className="rounded-full bg-red-500/20 p-1.5 text-xs text-red-400 hover:bg-red-500/40 transition"
+                title="Remove Image"
+              >
+                ✕
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Style */}

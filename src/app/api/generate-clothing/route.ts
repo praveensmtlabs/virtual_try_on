@@ -7,6 +7,7 @@ interface GenerateRequest {
   style?: string;
   color?: string;
   avatarId?: string;
+  image?: string; // Base64 reference image
 }
 
 const AVATAR_MODEL_CATALOG: Record<
@@ -34,6 +35,12 @@ const AVATAR_MODEL_CATALOG: Record<
       skinned: true,
       hiddenBodyParts: ["chest", "back", "upperArms"],
     },
+    tshirt: {
+      modelPath: "/3dmodels/men/tshirts/basictee/basictee.glb",
+      thumbnail: "/3dmodels/men/tshirts/basictee/basictee.png",
+      skinned: true,
+      hiddenBodyParts: ["chest", "back"],
+    },
     pants: {
       modelPath: "/3dmodels/men/pants/pants_black/tight_pant.glb",
       thumbnail: "/images/clothes/charcoal-pants.png",
@@ -54,6 +61,12 @@ const AVATAR_MODEL_CATALOG: Record<
       skinned: true,
       hiddenBodyParts: ["chest", "back"],
     },
+    tshirt: {
+      modelPath: "/3dmodels/women/tops/skylinecroptee/skylinecroptee.glb",
+      thumbnail: "/images/clothes/white-shirt.png",
+      skinned: true,
+      hiddenBodyParts: ["chest", "back"],
+    },
     pants: {
       modelPath: "/3dmodels/women/pants/women_fashionable_woven_pant.glb",
       thumbnail: "/images/clothes/charcoal-pants.png",
@@ -66,7 +79,7 @@ const AVATAR_MODEL_CATALOG: Record<
 export async function POST(req: Request) {
   try {
     const body: GenerateRequest = await req.json();
-    const { category, prompt, style = "Formal", color = "Black", avatarId = "adult-male" } = body;
+    const { category, prompt, style = "Formal", color = "Black", avatarId = "adult-male", image } = body;
 
     if (!category || !prompt) {
       return NextResponse.json(
@@ -78,12 +91,12 @@ export async function POST(req: Request) {
     const targetAvatar = avatarId === "adult-female" ? "adult-female" : "adult-male";
     const timestamp = Date.now();
 
-    // Default color mapping
+    // Direct color palette mapping
     let colorHex = "#121214";
     const colorMap: Record<string, string> = {
       pink: "#fbcfe8",
-      black: "#121214",
       white: "#f8f9fa",
+      black: "#121214",
       navy: "#1e293b",
       charcoal: "#27272a",
       beige: "#d4b996",
@@ -93,32 +106,58 @@ export async function POST(req: Request) {
     };
 
     const inputColorLower = color.toLowerCase();
-    for (const [key, hex] of Object.entries(colorMap)) {
-      if (inputColorLower.includes(key) || prompt.toLowerCase().includes(key)) {
-        colorHex = hex;
-        break;
+    if (colorMap[inputColorLower]) {
+      colorHex = colorMap[inputColorLower];
+    } else {
+      for (const [key, hex] of Object.entries(colorMap)) {
+        if (inputColorLower.includes(key) || prompt.toLowerCase().includes(key)) {
+          colorHex = hex;
+          break;
+        }
       }
     }
 
-    // Call Gemini API if GEMINI_API_KEY environment variable is present
+    // Compute fitScale based on style / fit parameter
+    let fitScale = 1.0;
+    const styleLower = style.toLowerCase();
+    if (styleLower.includes("slim") || styleLower.includes("tight")) {
+      fitScale = 0.95;
+    } else if (styleLower.includes("oversized") || styleLower.includes("loose")) {
+      fitScale = 1.08;
+    } else if (styleLower.includes("casual")) {
+      fitScale = 1.02;
+    }
+
+    // Call Gemini API (Vision / Multimodal synthesis if image present)
     const apiKey = process.env.GEMINI_API_KEY;
     if (apiKey) {
       try {
+        const parts: any[] = [
+          {
+            text: `You are a 3D Fashion Synthesis AI. Synthesize 3D garment specs for prompt: "${prompt}", category: "${category}", color: "${color}", style: "${style}", bodyType: "${targetAvatar}". ${
+              image ? "Analyze the attached reference clothing screenshot/image to extract its exact primary hex color, fabric pattern, and garment style." : ""
+            } Return ONLY JSON format: {"colorHex": "#HEX", "garmentName": "Descriptive Name", "fitScale": 0.95}`
+          }
+        ];
+
+        if (image) {
+          const base64Data = image.includes(",") ? image.split(",")[1] : image;
+          const mimeType = image.includes(";") ? image.split(";")[0].split(":")[1] : "image/png";
+          parts.push({
+            inlineData: {
+              mimeType,
+              data: base64Data
+            }
+          });
+        }
+
         const geminiRes = await fetch(
           `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              contents: [
-                {
-                  parts: [
-                    {
-                      text: `You are a 3D Fashion Synthesis AI. Synthesize 3D garment specs for prompt: "${prompt}", category: "${category}", color: "${color}", style: "${style}", bodyType: "${targetAvatar}". Return ONLY JSON: {"colorHex": "#HEX", "garmentName": "Descriptive Name"}`
-                    }
-                  ]
-                }
-              ]
+              contents: [{ parts }]
             })
           }
         );
@@ -130,31 +169,38 @@ export async function POST(req: Request) {
           if (jsonMatch) {
             const spec = JSON.parse(jsonMatch[0]);
             if (spec.colorHex) colorHex = spec.colorHex;
+            if (typeof spec.fitScale === "number") fitScale = spec.fitScale;
           }
         }
       } catch (err) {
-        console.warn("Gemini API call warning, using synthesized fallback:", err);
+        console.warn("Gemini Vision API call warning, using synthesized fallback:", err);
       }
+    }
+
+    // Determine subcategory (e.g. T-Shirt vs Formal Shirt)
+    let subCategory = category as string;
+    if (category === "shirt" && (prompt.toLowerCase().includes("t-shirt") || prompt.toLowerCase().includes("tee") || styleLower.includes("casual"))) {
+      subCategory = "tshirt";
     }
 
     // Retrieve real 3D model config for target avatar body shape
     const avatarCatalog = AVATAR_MODEL_CATALOG[targetAvatar] || AVATAR_MODEL_CATALOG["adult-male"];
-    const config = avatarCatalog[category] || avatarCatalog["shirt"];
+    const config = avatarCatalog[subCategory] || avatarCatalog[category] || avatarCatalog["shirt"];
 
-    const titleCat = category.charAt(0).toUpperCase() + category.slice(1);
+    const titleCat = subCategory === "tshirt" ? "T-Shirt" : category.charAt(0).toUpperCase() + category.slice(1);
     const item: ClothingItem = {
       id: `${category}-gemini-${timestamp}`,
-      name: `Gemini AI ${color} ${style} ${titleCat}`,
+      name: `Gemini AI ${image ? "Custom Vision" : color} ${style} ${titleCat}`,
       category: category as ClothingCategory,
       modelPath: config.modelPath,
-      thumbnail: config.thumbnail,
+      thumbnail: image || config.thumbnail,
       compatibleAvatars: [targetAvatar],
       hiddenBodyParts: config.hiddenBodyParts,
       skeletonProfile: targetAvatar,
       color: colorHex,
       useGlb: true,
       skinned: config.skinned,
-      fitScale: 1,
+      fitScale: fitScale,
     };
 
     return NextResponse.json({ success: true, item });
